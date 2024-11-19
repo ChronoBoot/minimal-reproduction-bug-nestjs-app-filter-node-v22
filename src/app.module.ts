@@ -1,5 +1,6 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
+import { APP_FILTER, BaseExceptionFilter } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { AppController } from './app.controller';
@@ -16,10 +17,10 @@ import { FindPlaceResolver } from './find-place.resolver';
   controllers: [AppController],
   providers: [
     AppService,
-    // {
-    //   provide: APP_FILTER,
-    //   useClass: BaseExceptionFilter,
-    // },
+    {
+      provide: APP_FILTER,
+      useClass: BaseExceptionFilter,
+    },
     FindPlaceResolver,
   ],
 })
